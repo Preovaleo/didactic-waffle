@@ -2,6 +2,7 @@
 namespace Minifier\Repository;
 
 use Minifier\Model\User;
+use Minifier\Exception\MySQLException;
 
 class UserRepository
 {

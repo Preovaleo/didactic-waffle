@@ -53,4 +53,17 @@ class UserManager
     {
         $this->doLogout();
     }
+
+    /**
+     * @param string $username
+     * @param string $password
+     * @return User
+     */
+    public function createUser($username, $password)
+    {
+        $user = new User();
+        $user->username = $username;
+        $user->hash = password_hash($password, PASSWORD_BCRYPT);
+        return $this->userR->add($user);
+    }
 }
