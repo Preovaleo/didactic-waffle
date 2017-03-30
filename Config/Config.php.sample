@@ -1,0 +1,12 @@
+<?php
+namespace Minifier\Config;
+
+class Config
+{
+    const DBHOST = 'localhost';
+    const DBNAME = 'minified_db';
+    const DBUSER = 'minified_u';
+    const DBPASSWORD = 'minified_pw';
+    const DEBUG = true;
+}
+

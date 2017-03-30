@@ -1,0 +1,8 @@
+#IDE files
+/nbproject
+
+#Vendor dir
+/vendor
+
+#Config file
+/Config/Config.php

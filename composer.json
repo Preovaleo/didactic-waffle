@@ -1,0 +1,26 @@
+{
+    "name": "preovaleo/didactic-waffle",
+    "description": "URL minifier with piwik integration",
+    "type": "software",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Théo BOUGE",
+            "email": "theo.bouge@gmail.com"
+        }
+    ],
+    "require": {
+        "klein/klein": "^2.1",
+        "twig/twig": "^1.33"
+    },
+    "autoload":{
+        "psr-4":{
+            "Minifier\\Config\\": "Config",
+            "Minifier\\Controller\\": "Controller",
+            "Minifier\\Exception\\": "Exception",
+            "Minifier\\Manager\\": "Manager",
+            "Minifier\\Model\\": "Model",
+            "Minifier\\Repository\\": "Repository"
+        }
+    }
+}
