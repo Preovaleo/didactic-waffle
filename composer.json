@@ -1,0 +1,13 @@
+{
+    "name": "preovaleo/didactic-waffle",
+    "description": "URL minifier with piwik integration",
+    "type": "software",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Théo BOUGE",
+            "email": "theo.bouge@gmail.com"
+        }
+    ],
+    "require": {}
+}
