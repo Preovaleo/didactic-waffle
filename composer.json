@@ -9,5 +9,7 @@
             "email": "theo.bouge@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "klein/klein": "^2.1"
+    }
 }
