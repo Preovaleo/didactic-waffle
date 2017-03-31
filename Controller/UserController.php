@@ -1,5 +1,4 @@
 <?php
-
 namespace Minifier\Controller;
 
 use Klein\Request;
@@ -9,8 +8,16 @@ use Klein\App;
 
 class UserController
 {
+
     public static function loginAction(Request $request, Response $response, ServiceProvider $service, App $app)
     {
+        var_dump($_SESSION);
+
+        if ($app->um->isLoggedIn()) {
+            $response->redirect('/admin');
+            return;
+        }
+
         $errors = array();
 
         if ($request->method('POST')) {
@@ -27,7 +34,17 @@ class UserController
         }
 
         return $app->twig->render('User/login.twig', array(
-            'errors' => $errors
+                'errors' => $errors
         ));
+    }
+
+    public static function logoutAction(Request $request, Response $response, ServiceProvider $service, App $app)
+    {
+        if (!$app->um->isLoggedIn()) {
+            $response->redirect('/user/login');
+            return;
+        }
+        $app->um->logout();
+        $response->redirect('/');
     }
 }

@@ -4,6 +4,8 @@ require_once '../vendor/autoload.php';
 use Klein\Klein;
 use Minifier\Manager\ServiceManager;
 
+session_start();
+
 $klein = new Klein();
 
 ServiceManager::initService($klein);
@@ -12,6 +14,10 @@ $klein->respond('GET', '/u/[s:token]', array('Minifier\Controller\RedirectContro
 
 $klein->with('/user', function (Klein $klein) {
     $klein->respond(array('GET', 'POST'), '/login', array('Minifier\Controller\UserController', 'loginAction'));
+    $klein->respond('GET', '/logout', array('Minifier\Controller\UserController', 'logoutAction'));
+});
+$klein->with('/admin', function(Klein $klein) {
+    $klein->respond('GET', '', array('Minifier\Controller\AdminController', 'indexAction'));
 });
 
 $klein->with('/api', function(Klein $klein) {

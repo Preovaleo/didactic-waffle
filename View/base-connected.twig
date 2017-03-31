@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}- Waffle{% endblock %}</title>
+        {% block css %}
+            <link rel="stylesheet" type="text/css" href="/bower/bootstrap/dist/css/bootstrap.min.css">
+            <link rel="stylesheet" type="text/css" href="/bower/bootstrap/dist/css/bootstrap-theme.min.css">
+        {% endblock %}
+        {% block js %}
+             <script src="/bower/jquery/dist/jquery.min.js"></script>
+             <script src="/bower/bootstrap/dist/js/bootstrap.min.js"></script>
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>
