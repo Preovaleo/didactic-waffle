@@ -3,6 +3,7 @@ namespace Minifier\Repository;
 
 use Minifier\Exception\MySQLException;
 use Minifier\Model\Minified;
+use Minifier\Exception\DuplicateKeyException;
 
 class MinifiedRepository
 {
@@ -57,16 +58,28 @@ class MinifiedRepository
 
     public function add(Minified $min)
     {
+        $test = $this->fetchbyToken($min->token);
+        if (!$test === false) {
+            throw new DuplicateKeyException('this token is already used');
+        }
+
         $stmt = $this->pdo->prepare('INSERT INTO minified(token, url) VALUES (:token, :url);');
         $stmt->bindValue(':token', $min->token);
         $stmt->bindValue(':url', $min->url);
         if (!$stmt->execute()) {
             throw new MySQLException($stmt);
         }
+        $min->id = $this->pdo->lastInsertId();
+        return $min;
     }
 
     public function update(Minified $min)
     {
+        $test = $this->fetchbyToken($min->token);
+        if (!(($test === false) || ($test !== false) && ($test->id === $min->id))) {
+            throw new DuplicateKeyException('this token is already used');
+        }
+
         $stmt = $this->pdo->prepare('UPDATE minified SET token = :token, url = :url WHERE id = :id;');
         $stmt->bindValue(':token', $min->token);
         $stmt->bindValue(':url', $min->url);
@@ -74,6 +87,7 @@ class MinifiedRepository
         if (!$stmt->execute()) {
             throw new MySQLException($stmt);
         }
+        return $min;
     }
 
     public function delete(Minified $min)
