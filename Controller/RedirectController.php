@@ -10,7 +10,7 @@ use Minifier\Repository\MinifiedRepository;
 class RedirectController
 {
 
-    public static function redirectAction(Request $request, Response $reponse, ServiceProvider $service, App $app)
+    public static function redirectAction(Request $request, Response $response, ServiceProvider $service, App $app)
     {
         $minifiedR = new MinifiedRepository($app->pdo);
         $minified = $minifiedR->fetchbyToken($request->token);
