@@ -11,7 +11,6 @@ class UserController
 
     public static function loginAction(Request $request, Response $response, ServiceProvider $service, App $app)
     {
-        var_dump($_SESSION);
 
         if ($app->um->isLoggedIn()) {
             $response->redirect('/admin');
