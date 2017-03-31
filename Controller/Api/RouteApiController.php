@@ -15,6 +15,11 @@ class RouteApiController
 
     public static function getAction(Request $request, Response $response, ServiceProvider $service, App $app)
     {
+        if (!$app->um->isLoggedin()) {
+            JsonRepManager::isDisconnected($response);
+            return;
+        }
+
         $id = $request->param('id', false);
         if ($id === false) {
             JsonRepManager::fail($response, 'ID NOT FOUND');
@@ -34,6 +39,11 @@ class RouteApiController
 
     public static function postAction(Request $request, Response $response, ServiceProvider $service, App $app)
     {
+        if (!$app->um->isLoggedin()) {
+            JsonRepManager::isDisconnected($response);
+            return;
+        }
+
         $min = new Minified();
         $min->token = $request->param('token', false);
         if ($min->token === false) {
@@ -56,6 +66,10 @@ class RouteApiController
 
     public static function putAction(Request $request, Response $response, ServiceProvider $service, App $app)
     {
+        if (!$app->um->isLoggedin()) {
+            JsonRepManager::isDisconnected($response);
+            return;
+        }
 
         $putM = new PutManager();
         $minifiedR = new MinifiedRepository($app->pdo);
@@ -86,6 +100,11 @@ class RouteApiController
 
     public static function deleteAction(Request $request, Response $response, ServiceProvider $service, App $app)
     {
+        if (!$app->um->isLoggedin()) {
+            JsonRepManager::isDisconnected($response);
+            return;
+        }
+
         $minifiedR = new MinifiedRepository($app->pdo);
         $id = $request->param('id', false);
 
