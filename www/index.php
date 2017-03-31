@@ -10,6 +10,7 @@ $klein = new Klein();
 
 ServiceManager::initService($klein);
 
+$klein->respond('GET', '/', array('Minifier\Controller\RootController', 'indexAction'));
 $klein->respond('GET', '/u/[s:token]', array('Minifier\Controller\RedirectController', 'redirectAction'));
 
 $klein->with('/user', function (Klein $klein) {
