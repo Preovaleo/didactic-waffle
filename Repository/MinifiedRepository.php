@@ -2,6 +2,7 @@
 namespace Minifier\Repository;
 
 use Minifier\Exception\MySQLException;
+use Minifier\Model\Minified;
 
 class MinifiedRepository
 {
@@ -25,11 +26,62 @@ class MinifiedRepository
      */
     public function fetchbyToken($token)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM minified WHERE token = :token LIMIT 1');
+        $stmt = $this->pdo->prepare('SELECT * FROM minified WHERE token = :token LIMIT 1;');
         $stmt->bindValue(':token', $token);
-        if (!$stmt->execute()){
+        if (!$stmt->execute()) {
             throw new MySQLException($stmt);
         }
         return $stmt->fetchObject('Minifier\Model\Minified');
+    }
+
+    public function fetch($id)
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM minified WHERE id = :id LIMIT 1;');
+        $stmt->bindValue(':id', $id);
+        if (!$stmt->execute()) {
+            throw new MySQLException($stmt);
+        }
+        return $stmt->fetchObject('Minifier\Model\Minified');
+    }
+
+    public function fetchAll($limit = 10, $offset = 0)
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM minified LIMIT :limit OFFSET :offset;');
+        $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        if (!$stmt->execute()) {
+            throw new MySQLException($stmt);
+        }
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, 'Minifier\Model\Minified');
+    }
+
+    public function add(Minified $min)
+    {
+        $stmt = $this->pdo->prepare('INSERT INTO minified(token, url) VALUES (:token, :url);');
+        $stmt->bindValue(':token', $min->token);
+        $stmt->bindValue(':url', $min->url);
+        if (!$stmt->execute()) {
+            throw new MySQLException($stmt);
+        }
+    }
+
+    public function update(Minified $min)
+    {
+        $stmt = $this->pdo->prepare('UPDATE minified SET token = :token, url = :url WHERE id = :id;');
+        $stmt->bindValue(':token', $min->token);
+        $stmt->bindValue(':url', $min->url);
+        $stmt->bindValue(':id', $min->id);
+        if (!$stmt->execute()) {
+            throw new MySQLException($stmt);
+        }
+    }
+
+    public function delete(Minified $min)
+    {
+        $stmt = $this->pdo->prepare('DELETE FROM minified WHERE id = :id');
+        $stmt->bindValue(':id', $min->id);
+        if (!$stmt->execute()) {
+            throw new MySQLException($stmt);
+        }
     }
 }
