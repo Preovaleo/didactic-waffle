@@ -1,5 +1,5 @@
 <?php
-require_once '../vendor/autoload.php';
+require_once sprintf('%s/vendor/autoload.php', dirname(dirname(__FILE__)));
 
 use Klein\Klein;
 use Minifier\Manager\ServiceManager;

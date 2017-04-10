@@ -25,7 +25,7 @@ class ServiceManager
             });
 
             $app->register('twig', function () {
-                $loader = new \Twig_Loader_Filesystem('View', '..');
+                $loader = new \Twig_Loader_Filesystem('View', dirname(dirname(__FILE__)));
                 return new \Twig_Environment($loader);
             });
         });

@@ -17,12 +17,7 @@
   "autoload": {
     "psr-4": {
       "Minifier\\Config\\": "Config",
-      "Minifier\\Controller\\": "Controller",
-      "Minifier\\Exception\\": "Exception",
-      "Minifier\\Manager\\": "Manager",
-      "Minifier\\Model\\": "Model",
-      "Minifier\\Repository\\": "Repository",
-      "Minifier\\Command\\": "Command"
+      "Minifier\\": "src"
     }
   },
   "config": {
