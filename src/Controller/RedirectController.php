@@ -18,6 +18,6 @@ class RedirectController
         if ($minified === false) {
             return 'Wrong Token';
         }
-        $reponse->redirect($minified->url);
+        $response->redirect($minified->url);
     }
 }

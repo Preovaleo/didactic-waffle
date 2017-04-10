@@ -15,7 +15,7 @@ class ServiceManager
 
     public static function initService(Klein $klein)
     {
-        $klein->respond(function (Request $request, Response $reponse, ServiceProvider $service, App $app) {
+        $klein->respond(function (Request $request, Response $response, ServiceProvider $service, App $app) {
             $app->register('pdo', function () {
                 return new \PDO(sprintf('mysql:host=%s;dbname=%s', Config::DBHOST, Config::DBNAME), Config::DBUSER, Config::DBPASSWORD);
             });
