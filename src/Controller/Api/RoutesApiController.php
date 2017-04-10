@@ -19,17 +19,18 @@ class RoutesApiController
         }
 
         $limit = 10;
-
         $offset = ((int) $request->param('page', 0)) * $limit;
 
         $minifiedR = new MinifiedRepository($app->pdo);
         $mins = $minifiedR->fetchAll($limit, $offset);
         $nbr = $minifiedR->count();
 
+        $total = (int) ($nbr / $limit);
+
+
         JsonRepManager::success($response, array(
             'mins' => $mins,
-            'nbr' => $nbr,
-            'limit' => $limit
+            'totalPages' => $total,
         ));
     }
 }
