@@ -22,7 +22,7 @@ class MinifiedRepository
     /**
      *
      * @param string $token
-     * @return Minifier\Model\Minified
+     * @return Minified
      * @throws MySQLException
      */
     public function fetchbyToken($token)
@@ -35,6 +35,12 @@ class MinifiedRepository
         return $stmt->fetchObject('Minifier\Model\Minified');
     }
 
+    /**
+     *
+     * @param int $id
+     * @return Minified
+     * @throws MySQLException
+     */
     public function fetch($id)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM minified WHERE id = :id LIMIT 1;');
@@ -45,6 +51,13 @@ class MinifiedRepository
         return $stmt->fetchObject('Minifier\Model\Minified');
     }
 
+    /**
+     *
+     * @param int $limit
+     * @param int $offset
+     * @return Minified
+     * @throws MySQLException
+     */
     public function fetchAll($limit = 10, $offset = 0)
     {
         $stmt = $this->pdo->prepare('SELECT * FROM minified LIMIT :limit OFFSET :offset;');
@@ -56,6 +69,13 @@ class MinifiedRepository
         return $stmt->fetchAll(\PDO::FETCH_CLASS, 'Minifier\Model\Minified');
     }
 
+    /**
+     *
+     * @param Minified $min
+     * @return Minified
+     * @throws DuplicateKeyException
+     * @throws MySQLException
+     */
     public function add(Minified $min)
     {
         $test = $this->fetchbyToken($min->token);
@@ -73,6 +93,13 @@ class MinifiedRepository
         return $min;
     }
 
+    /**
+     *
+     * @param Minified $min
+     * @return Minified
+     * @throws DuplicateKeyException
+     * @throws MySQLException
+     */
     public function update(Minified $min)
     {
         $test = $this->fetchbyToken($min->token);
@@ -90,6 +117,11 @@ class MinifiedRepository
         return $min;
     }
 
+    /**
+     *
+     * @param Minified $min
+     * @throws MySQLException
+     */
     public function delete(Minified $min)
     {
         $stmt = $this->pdo->prepare('DELETE FROM minified WHERE id = :id');
@@ -97,5 +129,19 @@ class MinifiedRepository
         if (!$stmt->execute()) {
             throw new MySQLException($stmt);
         }
+    }
+
+    /**
+     *
+     * @return int
+     * @throws MySQLException
+     */
+    public function count()
+    {
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) as nbr FROM minified');
+        if (!$stmt->execute()) {
+            throw new MySQLException($stmt);
+        }
+        return ((int) $stmt->fetchColumn());
     }
 }

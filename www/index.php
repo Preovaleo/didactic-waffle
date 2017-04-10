@@ -28,6 +28,7 @@ $klein->with('/api', function(Klein $klein) {
         $klein->respond('PUT', '', array('Minifier\Controller\Api\RouteApiController', 'putAction'));
         $klein->respond('DELETE', '', array('Minifier\Controller\Api\RouteApiController', 'deleteAction'));
     });
+    $klein->respond('GET', '/routes', array('Minifier\Controller\Api\RoutesApiController', 'getAction'));
 });
 
 $klein->dispatch();
