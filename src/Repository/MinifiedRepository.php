@@ -60,7 +60,7 @@ class MinifiedRepository
      */
     public function fetchAll($limit = 10, $offset = 0)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM minified LIMIT :limit OFFSET :offset;');
+        $stmt = $this->pdo->prepare('SELECT * FROM minified ORDER BY id DESC LIMIT :limit OFFSET :offset;');
         $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
         if (!$stmt->execute()) {
