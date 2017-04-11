@@ -5,9 +5,6 @@
 {% block css %}
     {{ parent() }}
     <style>
-        #btnAdd{
-            margin: 20px 0;
-        }
         #pagination{
             text-align: center;
         }
@@ -26,8 +23,22 @@
         <tbody id="tableTbody">
         </tbody>
     </table>
-    <div class="col-sm-6">
-        <button id='btnAdd' class="btn btn-primary btn-block">+</button>
+    <div class='col-sm-6' id ='placeholderPanelAdd'>
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th>token</th>
+                    <th>Url</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type='text' id='inputToken'></input></td>
+                    <td><input type='text' id='inputUrl'></input></td>
+                    <td><button class='btn btn-primary' id='btnAdd'>+</button></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="col-sm-6" id="pagination">
     </div>
@@ -37,5 +48,6 @@
     {{ parent() }}
     <script src="/bower/twbs-pagination/jquery.twbsPagination.min.js"></script>
     <script src="/bower/urijs/src/URI.min.js"></script>
+    <script src="/bower/bootbox.js/bootbox.js"></script>
     <script src="/js/admin_index.js"></script>
 {% endblock %}
