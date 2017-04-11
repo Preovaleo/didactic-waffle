@@ -56,10 +56,10 @@ function initVar() {
 }
 
 function initClick() {
-    $btnAdd.click(initAdd);
+    $btnAdd.click(add);
 }
 
-function initAdd() {
+function add() {
     $.post('/api/route', {
         token: $inputToken.val(),
         url: $inputUrl.val()
